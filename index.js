@@ -44,7 +44,7 @@ function loader( source ) {
   findRequireComments( source, template_path + '/../', options, deps );
 
   // Do not trim whitespace in case preserveWhitespace option is enabled
-  dust.config.whitespace = !options.preserveWhitespace;
+  dust.config.whitespace = options.preserveWhitespace;
 
   // Compile the template
   var template = dust.compile( source, name ); 
