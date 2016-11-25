@@ -45,6 +45,9 @@ Set a root path for your dust templates. This root will be removed from the begi
 ### dustAlias
 Customize the alias used for DustJS. Must match the alias set in the webpack configuration.
 
+### preserveWhitespace
+Set `preserveWhitespace: true` to disable whitespace trimming. By default DustJS trims all whitespace before compiling a template, enabling this option will prevent this.
+
 ### wrapperGenerator
 This option must be set via the "global" configuration object. What this means is that in your webpack configuration object, create a top-level object with the name `dust-loader-complete':
 ```javascript
@@ -62,6 +65,8 @@ This function generates the `dust.render` wrapper function. It _receives_ a sing
       return "function( context, callback ) { dust.render( '" + name + "', context, callback ); }";
     }
 ```
+
+
 
 ### verbose
 Set `verbose: true` to see console logs from dust-loader-complete

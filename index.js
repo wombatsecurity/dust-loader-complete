@@ -15,6 +15,7 @@ function loader( source ) {
     dustAlias: 'dustjs',
 	  namingFn: defaultNamingFunction,
     wrapperGenerator: defaultWrapperGenerator,
+    preserveWhitespace: false,
     verbose: false
   };
   var global_options = this.options['dust-loader-complete'];
@@ -41,7 +42,10 @@ function loader( source ) {
   
   // Find require comments
   findRequireComments( source, template_path + '/../', options, deps );
-    
+
+  // Do not trim whitespace in case preserveWhitespace option is enabled
+  dust.config.whitespace = !options.preserveWhitespace;
+
   // Compile the template
   var template = dust.compile( source, name ); 
 
