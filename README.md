@@ -66,7 +66,5 @@ This function generates the `dust.render` wrapper function. It _receives_ a sing
     }
 ```
 
-
-
 ### verbose
 Set `verbose: true` to see console logs from dust-loader-complete
