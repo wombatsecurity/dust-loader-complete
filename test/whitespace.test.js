@@ -3,7 +3,7 @@ var templateWhitespaceNotPreserved = require( "whitespace" );
 
 describe( "option preserveWhitespace", function( ) {
 
-    it( "should cause whitespace chars to have been removed in compiled template, in case option is disabled or not configured (default)", function( done ) {
+    it( "should cause whitespace chars to have been removed in output of templateFn, in case option is disabled or not configured (default)", function( done ) {
 
         var output;
         var matcher = /\n\s/g;
@@ -23,7 +23,7 @@ describe( "option preserveWhitespace", function( ) {
 
     });
 
-    it( "should cause whitespace chars to have been preserved in compiled template, when option is enabled", function( done ) {
+    it( "should cause whitespace chars to have been preserved in in output of templateFn, in case option is enabled", function( done ) {
 
         var output;
         var matcher = /\n\s/g;
