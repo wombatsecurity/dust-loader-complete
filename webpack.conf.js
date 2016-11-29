@@ -1,14 +1,24 @@
 var path = require( 'path' );
-var dustLoader = path.resolve(__dirname);
+var dustLoader = path.resolve( __dirname );
 
 module.exports = {
+
+    resolveLoader: {
+
+      alias: {
+        'preserve-whitespace': path.resolve( __dirname, 'index.js?preserveWhitespace')
+      }
+
+    },
+
     resolve: {
       root: path.join( __dirname, 'test/fixtures' ),
-		  extensions: ['', '.webpack.js', '.web.js', '.js', '.dust'],
+      extensions: ['', '.webpack.js', '.web.js', '.js', '.dust'],
       alias: {
         dustjs: 'dustjs-linkedin'
       }
     },
+
     module: {
       loaders: [
         {
@@ -19,4 +29,5 @@ module.exports = {
         }
       ]
     }
+
 };
