@@ -18,13 +18,13 @@ function loader( source ) {
     preserveWhitespace: false,
     verbose: false
   };
-  var global_options = this.options['dust-loader-complete'];
-  var loader_options = loaderUtils.parseQuery(this.query);
+  var global_options = this.options['dust-loader-complete'] || {};  
+  var loader_options = loaderUtils.getOptions(this) || {};
   var options = assign({}, default_options, global_options, loader_options);
   
   // Fix slashes & resolve root
   options.root = path.resolve( options.root.replace( '/', path.sep ) );
- 
+  
   // Get the path
   var template_path = path.relative( options.root, this.resourcePath );
   

@@ -12,20 +12,23 @@ module.exports = {
     },
 
     resolve: {
-      root: path.join( __dirname, 'test/fixtures' ),
-      extensions: ['', '.webpack.js', '.web.js', '.js', '.dust'],
+      modules: [
+        path.join( __dirname, 'test/fixtures' ),
+        'node_modules'
+      ],
+      extensions: ['.js', '.dust'],
       alias: {
         dustjs: 'dustjs-linkedin'
       }
     },
 
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.dust$/,
-          loader: dustLoader,
-          exclude: /node_modules/,
-          query: { root: "test/fixtures", verbose: true }
+          loader: dustLoader,          
+          options: { root: "test/fixtures", verbose: true },
+          exclude: /node_modules/
         }
       ]
     }

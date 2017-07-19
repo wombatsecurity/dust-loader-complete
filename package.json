@@ -1,6 +1,6 @@
 {
   "name": "dust-loader-complete",
-  "version": "1.5.1",
+  "version": "2.5.1",
   "description": "Webpack loader for DustJS template files",
   "main": "index.js",
   "scripts": {
@@ -28,19 +28,21 @@
   },
   "devDependencies": {
     "chai": "^3.0.0",
+    "dustjs-linkedin": "2.7.5",
     "istanbul": "^0.3.16",
     "karma": "^0.13.13",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.1.1",
     "karma-phantomjs-launcher": "^0.2.1",
-    "karma-webpack": "^1.7.0",
+    "karma-webpack": "2.0.4",
+    "loader-utils": "1.1.0",
     "mkdirp": "^0.5.1",
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
     "open": "0.0.5",
     "phantomjs": "^1.9.18",
     "rimraf": "^2.4.0",
-    "webpack": "^1.9.11"
+    "webpack": "^3.3.0"
   }
 }
