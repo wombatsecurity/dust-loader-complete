@@ -5,7 +5,7 @@ describe("dust-loader-complete's syntax matcher ", function( ) {
     var rendered;
     
     beforeEach( function( done ){
-        syntax( {}, function( err, out ) {
+        dust.render( syntax, {}, function( err, out ) {
             if (err) return done( err );
             rendered = out;
             done();

@@ -14,7 +14,6 @@ function loader( source ) {
     root: '',
     dustAlias: 'dustjs',
 	  namingFn: defaultNamingFunction,
-    wrapperGenerator: defaultWrapperGenerator,
     preserveWhitespace: false,
     verbose: false
   };
@@ -49,13 +48,12 @@ function loader( source ) {
   // Compile the template
   var template = dust.compile( source, name ); 
 
-  // Return the code needed to run this template
-  return "var dust = require('" + options.dustAlias + "/lib/dust'); "
+  // Return the compiled template
+  return "var dust = require('" + options.dustAlias + "'); " 
       + deps.join( ' ' )
-      + template
-      + "var fn = " + options.wrapperGenerator( name )
-      + '; fn.templateName = "' + name + '"; '
-      + "module.exports = fn;";
+      + 'var template = ' + template + ';'
+      + 'template.templateName = "' + name + '";'
+      + "module.exports = template;";
 }
 
 
@@ -64,11 +62,6 @@ function defaultNamingFunction( template_path, options ) {
 	return template_path
 			.replace( '.dust', '' )					 // remove .dust file extension
 			.split( path.sep ).join( '/' );	 // split at path separator and replace with a forward slash			
-}
-
-// Create a wrapper function for calling dust.render
-function defaultWrapperGenerator( name ) {
-  return "function( context, callback ) { dust.render( '" + name + "', context, callback ); }"
 }
 
 // Find DustJS partials

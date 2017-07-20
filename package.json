@@ -4,7 +4,8 @@
   "description": "Webpack loader for DustJS template files",
   "main": "index.js",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+    "debug": "karma start --single-run=false --browsers=Chrome"
   },
   "repository": {
     "type": "git",
@@ -32,9 +33,10 @@
     "istanbul": "^0.3.16",
     "karma": "^0.13.13",
     "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "2.2.0",
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.1.1",
-    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-phantomjs-launcher": "1.0.4",
     "karma-webpack": "2.0.4",
     "mkdirp": "^0.5.1",
     "mocha": "^2.2.5",

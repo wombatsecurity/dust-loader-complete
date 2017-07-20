@@ -1,21 +1,12 @@
 var dust = require( 'dustjs' );
-
 var template = require( 'absolute' );
 
-
-describe( "absolutely-pathed partials", function( ) {
-    var rendered;
-    
-    beforeEach( function( done ){
-        dust.render( 'absolute', {}, function( err, out ) {
-            if (err) return done( err );
-            rendered = out;
-            done();
+describe( "absolutely-pathed partials", function () {
+    it( 'renders the template properly (including partial)', function ( done ) {
+        dust.render( template, {}, function ( err, output ) {
+            expect( output.indexOf( "<!doctype html>" ) ).to.equal( 0 );
+            expect( output.indexOf( 'Hello world!' ) ).to.not.equal( -1 );
+            done( err );
         } );
-	} );
-    
-    it( 'should render properly as part of the compiled template', function() {
-        expect( rendered.indexOf( "<!doctype html>" ) ).to.equal( 0 );
-        expect( rendered.indexOf( 'Hello world!' ) ) .to.not.equal( -1 );     
-    });   
-});
+    } );
+} );
