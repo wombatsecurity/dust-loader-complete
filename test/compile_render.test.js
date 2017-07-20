@@ -3,7 +3,6 @@ var dust = require( 'dustjs' );
 var simple = require( 'simple' );
 var variable = require( 'variable' );
 
-
 describe( "dust-loader-complete", function () {
     it( 'registers the template by name on the dust global template cache', function ( done ) {
         dust.render( 'simple', {}, function ( err, out ) {
