@@ -47,7 +47,7 @@ dust-loader-complete offers several options to customize its behavior. Read the 
 Set a root path for your dust templates. This root will be removed from the beginning of the dust module path before it is turned into the template name via the `namingFn`.
 
 ### dustAlias
-Customize the alias used for DustJS. Must match the alias set in the webpack configuration. By default, `dustjs-linkedin` is used.
+If you've set up an alias for `dustjs-linkedin`, you can use this option to instruct the loader to use the same alias.
 
 ### preserveWhitespace
 Set `preserveWhitespace: true` to disable whitespace trimming. By default DustJS trims all whitespace before compiling a template, enabling this option will prevent this.
