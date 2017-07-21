@@ -6,8 +6,10 @@ dust-loader-complete is a webpack loader for DustJS files that compiles DustJS t
 1. Instead of returning the template function itself, it returns a wrapper function that can be called directly.
 2. It automatically finds all partials and requires them, which adds them into your webpack bundle.
 
-### Note
+### Notes
 * As of version 1.4.0, the returned wrapper function has a property `templateName` that holds the registered name of the template.
+* BREAKING CHANGE: as of version 2.5.1, this loader supports only Webpack 2 and up.
+* BREAKING CHANGE: as of version 3.0.0, the wrappingGenerator option has been removed. See below for details.
 
 ## Installation
 ```
@@ -48,7 +50,7 @@ Customize the alias used for DustJS. Must match the alias set in the webpack con
 ### preserveWhitespace
 Set `preserveWhitespace: true` to disable whitespace trimming. By default DustJS trims all whitespace before compiling a template, enabling this option will prevent this.
 
-### wrapperGenerator
+### wrapperGenerator (prior to 3.0.0 only)
 This option must be set via the "global" configuration object. What this means is that in your webpack configuration object, create a top-level object with the name `dust-loader-complete':
 ```javascript
     {
@@ -65,6 +67,9 @@ This function generates the `dust.render` wrapper function. It _receives_ a sing
       return "function( context, callback ) { dust.render( '" + name + "', context, callback ); }";
     }
 ```
+
+### wrapOutput
+Set `wrapOutput: true` to turn on the defaultWrapperGenerator from above.
 
 ### verbose
 Set `verbose: true` to see console logs from dust-loader-complete
