@@ -2,14 +2,16 @@
 A complete webpack loader for DustJS files.
 
 ## Overview
-dust-loader-complete is a webpack loader for DustJS files that compiles DustJS template files into their JavaScript template functions. It has two main advantages over the alternatives:
-1. Instead of returning the template function itself, it returns a wrapper function that can be called directly.
-2. It automatically finds all partials and requires them, which adds them into your webpack bundle.
+dust-loader-complete is a webpack loader for DustJS files that compiles DustJS template files into their JavaScript template functions. It has a couple of features that distinguish it from the alternatives:
+1. It automatically finds all partials and requires them, which adds them into your webpack bundle.
+2. It adds a `templateName` to the compile template function which can be easier to pass around your application if needed.
 
-### Notes
-* As of version 1.4.0, the returned wrapper function has a property `templateName` that holds the registered name of the template.
-* BREAKING CHANGE: as of version 2.5.1, this loader supports only Webpack 2 and up.
-* BREAKING CHANGE: as of version 3.0.0, the wrappingGenerator option has been removed. See below for details.
+### 2.5.1 breaking changes
+As of version 2.5.1 this loader supports only Webpack 2 and up.
+
+### 3.0.0 breaking changes
+* By default, the loader no longer wraps the templates in a wrapping function that calls `dust.render`. In addition, the `wrapperGenerator` option has been removed. It has been replaced by a `wrapOutput` option for backwards-compatibility. See below for details.
+* The default `dustAlias` has changed. See below for details.
 
 ## Installation
 ```
@@ -45,7 +47,7 @@ dust-loader-complete offers several options to customize its behavior. Read the 
 Set a root path for your dust templates. This root will be removed from the beginning of the dust module path before it is turned into the template name via the `namingFn`.
 
 ### dustAlias
-Customize the alias used for DustJS. Must match the alias set in the webpack configuration.
+Customize the alias used for DustJS. Must match the alias set in the webpack configuration. By default, `dustjs-linkedin` is used.
 
 ### preserveWhitespace
 Set `preserveWhitespace: true` to disable whitespace trimming. By default DustJS trims all whitespace before compiling a template, enabling this option will prevent this.
