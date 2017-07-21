@@ -12,7 +12,7 @@ function loader( source ) {
   // Set up default options & override them with other options
   var default_options = {
     root: '',
-    dustAlias: 'dustjs',
+    dustAlias: 'dustjs-linkedin',
     namingFn: defaultNamingFunction,
     preserveWhitespace: false,
     wrapOutput: false,
