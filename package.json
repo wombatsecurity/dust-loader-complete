@@ -1,6 +1,6 @@
 {
   "name": "dust-loader-complete",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Webpack loader for DustJS template files",
   "main": "index.js",
   "scripts": {
