@@ -169,7 +169,7 @@ function determinePartialName( partial_path, source_path, options ) {
   match = path_reg.exec( partial_path );
   if ( match[1] ) {
     // use os-appropriate separator
-    rel = match[2].replace( '/', path.sep );
+    rel = partial_path.replace( '/', path.sep );
 
     // join the root, the source_path, and the relative path, then find the relative path from the root
     // this is the new "absolute"" path
