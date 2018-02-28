@@ -19,7 +19,11 @@ function loader( source ) {
     verbose: false
   };
 
-  var global_options = this.options['dust-loader-complete'] || {};
+  // webpack 4 deprecated so don't use this.options instead use this.query
+  // for backward compatibility we use both
+ var query = this.options || this.query || {};
+ var global_options = query['dust-loader-complete'] || {};
+
   var loader_options = loaderUtils.getOptions( this ) || {};
   var options = assign( {}, default_options, global_options, loader_options );
 
