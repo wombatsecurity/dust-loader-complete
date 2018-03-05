@@ -19,7 +19,7 @@ function loader( source ) {
     verbose: false
   };
 
-  // webpack 4 deprecated so don't use this.options instead use this.query
+  // webpack 4 'this.options' is deprecated so avoid using this.options instead use this.query
   // for backward compatibility we use both
  var query = this.options || this.query || {};
  var global_options = query['dust-loader-complete'] || {};
