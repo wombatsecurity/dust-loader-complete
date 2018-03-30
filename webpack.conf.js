@@ -2,7 +2,8 @@ var path = require( 'path' );
 var dustLoader = path.resolve( __dirname );
 
 module.exports = {
-
+  mode: 'production',
+  
   resolveLoader: {
 
     alias: {
