@@ -1,6 +1,6 @@
 {
   "name": "dust-loader-complete",
-  "version": "3.0.1",
+  "version": "4.0.1",
   "description": "Webpack loader for DustJS template files",
   "main": "index.js",
   "scripts": {
@@ -16,34 +16,42 @@
     "dust",
     "dustjs"
   ],
-  "author": "Jason R Brubaker / Wombat Security Technologies",
+  "author": "Jason R Brubaker",
+  "contributors": [
+    "Jason R Brubaker",
+    "Jason Addleman",
+    "Shubham Kanodia",
+    "Arnout Evers",
+    "Tim Whitbeck",
+    "dmoses48",
+    "Raja Jaganathan",
+    "Christopher Beam"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/wombatsecurity/dust-loader-complete/issues"
   },
   "homepage": "https://github.com/wombatsecurity/dust-loader-complete",
   "dependencies": {
-    "dustjs-linkedin": "^2.7.2",
-    "loader-utils": "^1.1.0",
-    "object-assign": "^3.0.0"
+    "loader-utils": "^1.1.0"
   },
   "devDependencies": {
     "chai": "^3.0.0",
     "dustjs-linkedin": "2.7.5",
-    "istanbul": "^0.3.16",
     "karma": "^0.13.13",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.1.1",
-    "karma-phantomjs-launcher": "1.0.4",
-    "karma-webpack": "2.0.4",
-    "mkdirp": "^0.5.1",
+    "karma-webpack": "3.0.0",
     "mocha": "^2.2.5",
-    "node-libs-browser": "^0.5.2",
-    "open": "0.0.5",
-    "phantomjs": "^1.9.18",
-    "rimraf": "^2.4.0",
-    "webpack": "^4.0.1"
+    "webpack": "^4.4.1"
+  },
+  "engines": {
+    "node": ">=6.9.0"
+  },
+  "peerDependencies": {
+    "dustjs-linkedin": "^2.7.2",
+    "webpack": "^3.0.0 || ^4.0.0"
   }
 }
