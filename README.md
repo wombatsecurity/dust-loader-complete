@@ -13,9 +13,15 @@ As of version 2.5.1 this loader supports only Webpack 2 and up.
 * By default, the loader no longer wraps the templates in a wrapping function that calls `dust.render`. In addition, the `wrapperGenerator` option has been removed. It has been replaced by a `wrapOutput` option for backwards-compatibility. See below for details.
 * The default `dustAlias` has changed. See below for details.
 
+### 4.0.1 breaking changes
+* dust-loader-complete only supports:
+    * node versions greater than 6.9.x (lts/boron)
+    * webpack versions greater than 3.x.x
+    * dustjs-linkedin version greater than 2.7.2
+
 ## Installation
 ```
-    npm install --save-dev dust-loader-complete
+    npm install --save-dev dust-loader-complete dustjs-linkedin
 ```
 	
 ## Usage

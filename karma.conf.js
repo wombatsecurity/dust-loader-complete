@@ -1,8 +1,8 @@
 // Karma configuration
 // Generated on Thu Oct 22 2015 13:51:37 GMT-0400 (Eastern Daylight Time)
 
-module.exports = function(config) {
-  config.set({
+module.exports = function( config ) {
+  config.set( {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'],
+    frameworks: [ 'mocha', 'chai' ],
 
 
     // list of files / patterns to load in the browser
@@ -20,19 +20,18 @@ module.exports = function(config) {
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/*.test.js': ['webpack'] 
+      'test/*.test.js': [ 'webpack' ] 
     },
-    
-    
+
+
     // configure webpack for webpack pre-processor
-		webpack: require( './webpack.conf' ),
+    webpack: require( './webpack.config' ),
 
 
     // test results reporter to use
@@ -60,7 +59,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: [ 'Chrome' ],
 
 
     // Continuous Integration mode
@@ -70,6 +69,6 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultanous
     concurrency: Infinity
-   
-  })
+
+  } );
 }

@@ -1,16 +1,20 @@
-var path = require( 'path' );
-var dust = require( 'dustjs-linkedin' );
-var assign = require( 'object-assign' );
-var loaderUtils = require( 'loader-utils' );
-var fs = require( 'fs' );
+// @ts-check
+'use-strict';
+
+// dependencies
+const path = require( 'path' );
+const dust = require( 'dustjs-linkedin' );
+const { getOptions } = require( 'loader-utils' );
 
 
 // Main loader function
 function loader( source ) {
-  if ( this.cacheable ) { this.cacheable(); }
+
+  // dust files don't have side effects, so loader results are cacheable
+  if ( this.cacheable ) this.cacheable();
 
   // Set up default options & override them with other options
-  var default_options = {
+  const default_options = {
     root: '',
     dustAlias: 'dustjs-linkedin',
     namingFn: defaultNamingFunction,
@@ -19,28 +23,31 @@ function loader( source ) {
     verbose: false
   };
 
-  // webpack 4 'this.options' is deprecated so avoid using this.options instead use this.query
-  // for backward compatibility we use both
- var query = this.options || this.query || {};
- var global_options = query['dust-loader-complete'] || {};
+  // webpack 4 'this.options' was deprecated in webpack 3 and removed in webpack 4
+  // if you want to use global loader options, use dust-loader-complete < v4.0.0
+  // var query = this.options || this.query || {};
+  // var global_options = query['dust-loader-complete'] || {};
 
-  var loader_options = loaderUtils.getOptions( this ) || {};
-  var options = assign( {}, default_options, global_options, loader_options );
+  // get user supplied loader options from `this.query`
+  const loader_options = getOptions( this ) || {};
+
+  // merge user options with default options
+  const options = Object.assign( {}, default_options, loader_options );
 
   // Fix slashes & resolve root
   options.root = path.resolve( options.root.replace( '/', path.sep ) );
 
   // Get the path
-  var template_path = path.relative( options.root, this.resourcePath );
+  const template_path = path.relative( options.root, this.resourcePath );
 
   // Create the template name
-  var name = options.namingFn( template_path, options );
+  const name = options.namingFn( template_path, options );
 
   // Log
   log( options, 'Loading DustJS module from "' + template_path + '": naming template "' + name + '"' );
 
   // Find different styles of dependencies
-  var deps = [];
+  const deps = [];
 
   // Find regular dust partials, updating the source as needed for relatively-pathed partials
   source = findPartials( source, template_path + '/../', options, deps );
@@ -52,10 +59,10 @@ function loader( source ) {
   dust.config.whitespace = options.preserveWhitespace;
 
   // Compile the template
-  var template = dust.compile( source, name );
+  const template = dust.compile( source, name );
 
   // Build the returned string
-  var returnedString;
+  let returnedString;
   if ( options.wrapOutput ) {
     returnedString = "var dust = require('" + options.dustAlias + "/lib/dust'); "
       + deps.join( ' ' ) + template
