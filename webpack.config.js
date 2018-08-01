@@ -2,7 +2,9 @@ const { resolve, join } = require( 'path' );
 
 module.exports = {
 
-  mode: 'production',
+  mode: 'development',
+
+  devtool: 'inline-source-map',
   
   resolveLoader: {
     alias: {
@@ -32,6 +34,14 @@ module.exports = {
         root: 'test/fixtures',
         verbose: true
       }
-    } ]
+    }, {
+			test: /\.jpe?g|png|gif|svg$/i,
+			loader: 'file-loader',
+			options: {
+        name: '[path][name].[ext]',
+        context: resolve( __dirname, 'test/fixtures' ),
+        publicPath: '/assets'
+			}
+		} ]
   }
 };

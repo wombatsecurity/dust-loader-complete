@@ -3,21 +3,23 @@ A complete webpack loader for DustJS files.
 
 ## Overview
 dust-loader-complete is a webpack loader for DustJS files that compiles DustJS template files into their JavaScript template functions. It has a couple of features that distinguish it from the alternatives:
-1. It automatically finds all partials and requires them, which adds them into your webpack bundle.
+1. It finds all partials and requires them, which adds them into your webpack bundle.
+2. It finds `<img>` tags and resolves the images specified in the `src` (see options below to disable).
 2. It adds a `templateName` to the compile template function which can be easier to pass around your application if needed.
-
-### 2.5.1 breaking changes
-As of version 2.5.1 this loader supports only Webpack 2 and up.
-
-### 3.0.0 breaking changes
-* By default, the loader no longer wraps the templates in a wrapping function that calls `dust.render`. In addition, the `wrapperGenerator` option has been removed. It has been replaced by a `wrapOutput` option for backwards-compatibility. See below for details.
-* The default `dustAlias` has changed. See below for details.
 
 ### 4.0.1 breaking changes
 * dust-loader-complete only supports:
     * node versions greater than 6.9.x (lts/boron)
     * webpack versions greater than 3.x.x
     * dustjs-linkedin version greater than 2.7.2
+
+### 3.0.0 breaking changes
+* By default, the loader no longer wraps the templates in a wrapping function that calls `dust.render`. In addition, the `wrapperGenerator` option has been removed. It has been replaced by a `wrapOutput` option for backwards-compatibility. See below for details.
+* The default `dustAlias` has changed. See below for details.
+
+### 2.5.1 breaking changes
+As of version 2.5.1 this loader supports only Webpack 2 and up.
+
 
 ## Installation
 ```
@@ -51,6 +53,9 @@ dust-loader-complete offers several options to customize its behavior. Read the 
 
 ### root
 Set a root path for your dust templates. This root will be removed from the beginning of the dust module path before it is turned into the template name via the `namingFn`.
+
+### ignoreImages
+Set this to `true` to skip the resolving of image dependencies from your dust templates.
 
 ### dustAlias
 If you've set up an alias for `dustjs-linkedin`, you can use this option to instruct the loader to use the same alias.
