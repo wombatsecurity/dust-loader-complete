@@ -2,5 +2,6 @@
 
 {<bodyContent}
 	<img width="250px" src="./images/dolphin.jpg" style="display:block" />
+	<img src = "./images/dolphin.jpg"/>
 {/bodyContent}
 

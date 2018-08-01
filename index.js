@@ -142,7 +142,7 @@ function findPartials(source, source_path, options, deps) {
 
 // Look for <img> tags and require the actual files
 function findImages(templateName, source, deps, options) {
-  var reg = /(<img\s.+?src=['"])([^'"]+)(['"][^/>]+(?:\s+)?\/?>)/g,
+  var reg = /(<img\s.*src\s?=\s?['"])([^'"]+)(['"][^/>]*\/?>)/g,
     result = null;
 
   // search source & add a dependency for each match
