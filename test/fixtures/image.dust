@@ -1,0 +1,6 @@
+{>"layouts/master" title="Image" /}
+
+{<bodyContent}
+	<img width="250px" src="./images/dolphin.jpg" style="display:block" />
+{/bodyContent}
+

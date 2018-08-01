@@ -32,6 +32,12 @@ module.exports = {
         root: 'test/fixtures',
         verbose: true
       }
-    } ]
+    }, {
+			test: /\.jpe?g|png|gif|svg$/i,
+			loader: 'file-loader',
+			options: {
+				name: '[path][name].[ext]'
+			}
+		} ]
   }
 };

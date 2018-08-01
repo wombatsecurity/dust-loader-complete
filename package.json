@@ -38,6 +38,7 @@
   "devDependencies": {
     "chai": "^3.0.0",
     "dustjs-linkedin": "2.7.5",
+    "file-loader": "1.1.11",
     "karma": "^0.13.13",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "2.2.0",

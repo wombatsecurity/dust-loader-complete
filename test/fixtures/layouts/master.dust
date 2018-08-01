@@ -11,7 +11,7 @@
 
     </head>
     <body>
-      {+bodyContent}{/bodyContent}
+        {+bodyContent}{/bodyContent}
     </body>
 </html>
 
