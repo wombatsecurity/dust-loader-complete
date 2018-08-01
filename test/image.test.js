@@ -9,6 +9,7 @@ describe("<img> tags", function () {
             expect(output.indexOf('<img width="250px" src="/assets/images/dolphin.jpg" style="display:block" />')).to.be.greaterThan(-1);
 
             // look for second tag
+            console.log(output);
             expect(output.indexOf('<img src = "/assets/images/dolphin.jpg"/>')).to.be.greaterThan(-1);
 
             done(err);

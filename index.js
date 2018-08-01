@@ -56,7 +56,7 @@ function loader(source) {
   // Find image dependencies
   if (!options.ignoreImages) {
     source = findImages(name, source, deps, options);
-  } 
+  }
 
   // Find require comments
   findRequireComments(source, template_path + '/../', options, deps);
@@ -166,7 +166,7 @@ function findImages(templateName, source, deps, options) {
 
     // replace the original image path with a partial template call to our method that will return the path.
     const replace = `${result[1]}{>"${imageTemplateName}"/}${result[3]}`
-    source = source.substring(0, result.index) + replace + source.substring(result.index + result[0].length);
+    source = source.replace(result[0], replace);
 
     // update regex index
     reg.lastIndex += (replace.length - result[0].length);
