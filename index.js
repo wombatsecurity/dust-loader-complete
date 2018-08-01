@@ -20,7 +20,8 @@ function loader(source) {
     namingFn: defaultNamingFunction,
     preserveWhitespace: false,
     wrapOutput: false,
-    verbose: false
+    verbose: false,
+    ignoreImages: false
   };
 
   // webpack 4 'this.options' was deprecated in webpack 3 and removed in webpack 4
@@ -53,7 +54,9 @@ function loader(source) {
   source = findPartials(source, template_path + '/../', options, deps);
 
   // Find image dependencies
-  source = findImages(name, source, deps, options);
+  if (!options.ignoreImages) {
+    source = findImages(name, source, deps, options);
+  } 
 
   // Find require comments
   findRequireComments(source, template_path + '/../', options, deps);
