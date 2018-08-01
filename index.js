@@ -13,9 +13,6 @@ function loader(source) {
   // dust files don't have side effects, so loader results are cacheable
   if (this.cacheable) this.cacheable();
 
-  // let webpack know that we will be using a callback when the loader is finished (needed so we can resolve images)
-  const done = this.async();
-
   // Set up default options & override them with other options
   const default_options = {
     root: '',
@@ -56,7 +53,7 @@ function loader(source) {
   source = findPartials(source, template_path + '/../', options, deps);
 
   // Find image dependencies
-  //source = findImages(name, source, deps, options);
+  source = findImages(name, source, deps, options);
 
   // Find require comments
   findRequireComments(source, template_path + '/../', options, deps);
@@ -140,9 +137,9 @@ function findPartials(source, source_path, options, deps) {
   return source;
 }
 
+// Look for <img> tags and require the actual files
 function findImages(templateName, source, deps, options) {
-  log(options, `Looking for images in source`);
-  var reg = /(<img\s.+?src=['"])(.+)(['"](?:\s+)?\/?>)/g,
+  var reg = /(<img\s.+?src=['"])([^'"]+)(['"][^/>]+(?:\s+)?\/?>)/g,
     result = null;
 
   // search source & add a dependency for each match

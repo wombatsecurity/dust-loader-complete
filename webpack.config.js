@@ -3,6 +3,8 @@ const { resolve, join } = require( 'path' );
 module.exports = {
 
   mode: 'production',
+
+  devtool: 'source-map',
   
   resolveLoader: {
     alias: {
@@ -36,7 +38,8 @@ module.exports = {
 			test: /\.jpe?g|png|gif|svg$/i,
 			loader: 'file-loader',
 			options: {
-				name: '[path][name].[ext]'
+        name: '[path][name].[ext]',
+        context: resolve( __dirname, 'test/fixtures' )
 			}
 		} ]
   }
