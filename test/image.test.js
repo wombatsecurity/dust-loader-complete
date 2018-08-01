@@ -8,7 +8,7 @@ describe("<img> tags", function () {
             const reg = /(<img\s.+?src=['"])([^'"]+)(['"][^/>]+(?:\s+)?\/?>)/g;
             const result = reg.exec(output);
             expect(result).not.to.be.null;
-            expect(result[2]).to.equal(path.join(process.cwd(), 'images/dolphin.jpg'));
+            expect(result[2]).to.equal('/assets/images/dolphin.jpg');
             done(err);
         });
     });
