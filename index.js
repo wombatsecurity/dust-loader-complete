@@ -21,7 +21,8 @@ function loader(source) {
     preserveWhitespace: false,
     wrapOutput: false,
     verbose: false,
-    ignoreImages: false
+    ignoreImages: false,
+    excludeImageRegex: undefined
   };
 
   // webpack 4 'this.options' was deprecated in webpack 3 and removed in webpack 4
@@ -151,6 +152,13 @@ function findImages(templateName, source, deps, options) {
     const imageTemplateName = `${templateName}dep${deps.length}`;
 
     log(options, `found image ${src}`);
+
+    // use excludeImageRegex if set to skip images if the path matches the regex
+    const skipImg = options.excludeImageRegex && options.excludeImageRegex.test(src);
+    if (skipImg) {
+      log(options, `skipping image ${src} (matched exclude filter)`);
+      continue;
+    }
 
     // do our own custom registration of a template-like function that will use require to get the actual path
     const srcTemplate = `(function() {

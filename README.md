@@ -4,7 +4,7 @@ A complete webpack loader for DustJS files.
 ## Overview
 dust-loader-complete is a webpack loader for DustJS files that compiles DustJS template files into their JavaScript template functions. It has a couple of features that distinguish it from the alternatives:
 1. It finds all partials and requires them, which adds them into your webpack bundle.
-2. It finds `<img>` tags and resolves the images specified in the `src` (see options below to disable).
+2. It finds `<img>` tags and resolves the images specified in the `src` (see options below to disable or filter which paths are resolved).
 2. It adds a `templateName` to the compile template function which can be easier to pass around your application if needed.
 
 ### 4.0.1 breaking changes
@@ -56,6 +56,9 @@ Set a root path for your dust templates. This root will be removed from the begi
 
 ### ignoreImages
 Set this to `true` to skip the resolving of image dependencies from your dust templates.
+
+### excludeImageRegex
+Set this to a Regex if you want to exclude some image paths from being resolved. If the contents of the `src` attribute match the Regex, the image tag will not be processed.
 
 ### dustAlias
 If you've set up an alias for `dustjs-linkedin`, you can use this option to instruct the loader to use the same alias.

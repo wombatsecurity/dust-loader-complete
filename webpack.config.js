@@ -32,7 +32,8 @@ module.exports = {
       loader: resolve( __dirname, 'index' ),
       options: {
         root: 'test/fixtures',
-        verbose: true
+        verbose: true,
+        excludeImageRegex: /[{}]/
       }
     }, {
 			test: /\.jpe?g|png|gif|svg$/i,
