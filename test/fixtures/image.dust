@@ -2,7 +2,8 @@
 
 {<bodyContent}
 	<img id="first" width="250px" src="./images/dolphin.jpg" style="display:block" />
-	<img src = "./images/dolphin.jpg"/><img src = "./images/dolphin.jpg" id="third"/>
+	<img src="/foo/{skip_this}"/>
+	<img src = "./images/dolphin.jpg"/><img src = "./images/dolphin.jpg" id="dolphin2"/>
 	
 {/bodyContent}
 
