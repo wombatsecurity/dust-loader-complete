@@ -2,8 +2,8 @@
 
 {<bodyContent}
 	<img id="first" width="250px" src="./images/dolphin.jpg" style="display:block" />
-	<img src="/foo/{skip_this}"/>
+	<img src="/foo/{reference}"/>
 	<img src = "./images/dolphin.jpg"/><img src = "./images/dolphin.jpg" id="dolphin2"/>
-	
+	<img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"/>	
 {/bodyContent}
 

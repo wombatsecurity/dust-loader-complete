@@ -143,22 +143,26 @@ function findPartials(source, source_path, options, deps) {
 
 // Look for <img> tags and require the actual files
 function findImages(templateName, source, deps, options) {
-  var reg = /(<img\s.*?src\s?=\s?['"])([^'"]+)(['"][^/>]*\/?>)/g,
+  var imgReg = /(<img\s.*?src\s?=\s?['"])([^'"]+)(['"][^/>]*\/?>)/g,
+    referenceReg = /[{}]/,
     result = null;
 
   // search source & add a dependency for each match
-  while ((result = reg.exec(source)) !== null) {
+  while ((result = imgReg.exec(source)) !== null) {
     const src = result[2];
     const imageTemplateName = `${templateName}dep${deps.length}`;
 
-    log(options, `found image ${src}`);
-
-    // use excludeImageRegex if set to skip images if the path matches the regex
-    const skipImg = options.excludeImageRegex && options.excludeImageRegex.test(src);
-    if (skipImg) {
-      log(options, `skipping image ${src} (matched exclude filter)`);
+    // skip this image if a) it has a dustJS reference in it or b) an optional excludeImageRegex matches
+    if (referenceReg.test(src)) {
+      log(options, `skipping image ${src} (src includes a DustJS reference)`);
+      continue
+    }
+    if (options.excludeImageRegex && options.excludeImageRegex.test(src)) {
+      log(options, `skipping image ${src} (src matches excludeImageRegex)`);
       continue;
     }
+
+    log(options, `requiring image ${src}`);
 
     // do our own custom registration of a template-like function that will use require to get the actual path
     const srcTemplate = `(function() {
@@ -177,7 +181,7 @@ function findImages(templateName, source, deps, options) {
     source = source.replace(result[0], replace);
 
     // update regex index
-    reg.lastIndex += (replace.length - result[0].length);
+    imgReg.lastIndex += (replace.length - result[0].length);
   }
 
   return source;

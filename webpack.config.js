@@ -33,7 +33,7 @@ module.exports = {
       options: {
         root: 'test/fixtures',
         verbose: true,
-        excludeImageRegex: /[{}]/
+        excludeImageRegex: /^https:\/\//
       }
     }, {
 			test: /\.jpe?g|png|gif|svg$/i,
