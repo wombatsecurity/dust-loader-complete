@@ -2,13 +2,14 @@
 'use-strict';
 
 // dependencies
+const fs = require('fs');
 const path = require('path');
 const dust = require('dustjs-linkedin');
 const { getOptions } = require('loader-utils');
 
 
 // Main loader function
-function loader(source) {
+async function loader(source) {
 
   // dust files don't have side effects, so loader results are cacheable
   if (this.cacheable) this.cacheable();
@@ -22,7 +23,8 @@ function loader(source) {
     wrapOutput: false,
     verbose: false,
     ignoreImages: false,
-    excludeImageRegex: undefined
+    excludeImageRegex: undefined,
+    htmlOutput: undefined
   };
 
   // webpack 4 'this.options' was deprecated in webpack 3 and removed in webpack 4
@@ -67,6 +69,23 @@ function loader(source) {
 
   // Compile the template
   const template = dust.compile(source, name);
+
+  // Render the returned html
+  if (options.htmlOutput) {
+    let htmlString;
+
+    htmlString = await new Promise(function(resolve, reject) {
+      dust.loadSource(template);
+      dust.renderSource(source, {}, function(err, result) {
+        if(err) console.log(err);
+        resolve(result);
+      });
+    });
+
+    if (options.htmlOutput === 'string') return htmlString;
+
+    return "module.exports = \"" + htmlString.replace(/\"/g, "\\\"") + "\"";
+  }
 
   // Build the returned string
   let returnedString;
@@ -135,6 +154,16 @@ function findPartials(source, source_path, options, deps) {
 
       // update regex index
       reg.lastIndex += (replace.length - result[0].length);
+    }
+
+    if (options.htmlOutput) {
+      // fetch partial source
+      partial.path = options.root+"/"+partial.name+".dust";
+      partial.source = fs.readFileSync(partial.path, 'utf8');
+
+      // compile and cache partial
+      var compiled = dust.compile(partial.source, partial.name);
+      dust.loadSource(compiled);
     }
   }
 
