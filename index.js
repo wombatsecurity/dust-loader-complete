@@ -91,7 +91,7 @@ async function loader(source) {
     // Returnd html string for using post html loader
     if (options.preHtmlLoader) return htmlString;
 
-    return "module.exports = \"" + htmlString.replace(/\"/g, "\\\"") + "\"";
+    return "module.exports = `" + htmlString.replace(/\`/g, "\\\`") + "`";
   }
 
   // Build the returned string
