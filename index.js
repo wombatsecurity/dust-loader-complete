@@ -63,7 +63,7 @@ async function loader(source) {
   source = findPartials(source, template_path + '/../', options, deps);
 
   // Find image dependencies
-  if (!options.ignoreImages) {
+  if (!options.ignoreImages && !options.htmlOutput) {
     source = findImages(name, source, deps, options);
   }
 
