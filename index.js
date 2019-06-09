@@ -24,7 +24,8 @@ async function loader(source) {
     verbose: false,
     ignoreImages: false,
     excludeImageRegex: undefined,
-    htmlOutput: undefined
+    htmlOutput: false,
+    preHtmlLoader: false
   };
 
   // webpack 4 'this.options' was deprecated in webpack 3 and removed in webpack 4
@@ -37,6 +38,11 @@ async function loader(source) {
 
   // merge user options with default options
   const options = Object.assign({}, default_options, loader_options);
+
+  // Set root to relative path if not set and htmlOutput enabled
+  if (!options.root && options.htmlOutput) {
+    options.root = this.context || this.rootContext;
+  }
 
   // Fix slashes & resolve root
   options.root = path.resolve(options.root.replace('/', path.sep));
@@ -76,13 +82,13 @@ async function loader(source) {
 
     htmlString = await new Promise(function(resolve, reject) {
       dust.loadSource(template);
-      dust.renderSource(source, {}, function(err, result) {
+      dust.render(name, options, function(err, result) {
         if(err) console.log(err);
         resolve(result);
       });
     });
 
-    if (options.htmlOutput === 'string') return htmlString;
+    if (options.preHtmlLoader) return htmlString;
 
     return "module.exports = \"" + htmlString.replace(/\"/g, "\\\"") + "\"";
   }
@@ -158,7 +164,7 @@ function findPartials(source, source_path, options, deps) {
 
     if (options.htmlOutput) {
       // fetch partial source
-      partial.path = options.root+"/"+partial.name+".dust";
+      partial.path = path.resolve(options.root, partial.name+".dust");
       partial.source = fs.readFileSync(partial.path, 'utf8');
 
       // compile and cache partial
