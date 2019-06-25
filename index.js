@@ -24,8 +24,7 @@ async function loader(source) {
     verbose: false,
     ignoreImages: false,
     excludeImageRegex: undefined,
-    htmlOutput: false,
-    preHtmlLoader: false
+    htmlOutput: false
   };
 
   // webpack 4 'this.options' was deprecated in webpack 3 and removed in webpack 4
@@ -87,9 +86,6 @@ async function loader(source) {
         resolve(result);
       });
     });
-
-    // Returnd html string for using post html loader
-    if (options.preHtmlLoader) return htmlString;
 
     return "module.exports = `" + htmlString.replace(/\`/g, "\\\`") + "`";
   }
