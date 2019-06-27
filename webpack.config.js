@@ -9,7 +9,8 @@ module.exports = {
   resolveLoader: {
     alias: {
       'preserve-whitespace': resolve( __dirname, 'index.js?preserveWhitespace' ),
-      'wrap-output': resolve( __dirname, 'index.js?wrapOutput' )
+      'wrap-output': resolve( __dirname, 'index.js?wrapOutput' ),
+      'html-file': resolve( __dirname, 'index.js?htmlFile' )
     }
   },
 
