@@ -10,7 +10,7 @@ module.exports = {
     alias: {
       'preserve-whitespace': resolve( __dirname, 'index.js?preserveWhitespace' ),
       'wrap-output': resolve( __dirname, 'index.js?wrapOutput' ),
-      'html-file': resolve( __dirname, 'index.js?htmlFile' )
+      'render': resolve( __dirname, 'index.js?render' )
     }
   },
 

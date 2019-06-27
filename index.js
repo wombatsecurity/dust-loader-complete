@@ -24,7 +24,7 @@ async function loader(source) {
     verbose: false,
     ignoreImages: false,
     excludeImageRegex: undefined,
-    htmlFile: false
+    render: false
   };
 
   // webpack 4 'this.options' was deprecated in webpack 3 and removed in webpack 4
@@ -38,8 +38,8 @@ async function loader(source) {
   // merge user options with default options
   const options = Object.assign({}, default_options, loader_options);
 
-  // Set root to relative path if not set and htmlFile enabled
-  if (!options.root && options.htmlFile) {
+  // Set root to relative path if not set and render enabled
+  if (!options.root && options.render) {
     options.root = this.context || this.rootContext;
   }
 
@@ -62,7 +62,7 @@ async function loader(source) {
   source = findPartials(source, template_path + '/../', options, deps);
 
   // Find image dependencies
-  if (!options.ignoreImages && !options.htmlFile) {
+  if (!options.ignoreImages && !options.render) {
     source = findImages(name, source, deps, options);
   }
 
@@ -76,7 +76,7 @@ async function loader(source) {
   const template = dust.compile(source, name);
 
   // Render the returned html
-  if (options.htmlFile) {
+  if (options.render) {
     let htmlString;
 
     htmlString = await new Promise(function(resolve, reject) {
@@ -159,7 +159,7 @@ function findPartials(source, source_path, options, deps) {
       reg.lastIndex += (replace.length - result[0].length);
     }
 
-    if (options.htmlFile) {
+    if (options.render) {
       // fetch partial source
       partial.path = path.resolve(options.root, partial.name+".dust");
       partial.source = fs.readFileSync(partial.path, 'utf8');
