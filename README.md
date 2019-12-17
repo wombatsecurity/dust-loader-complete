@@ -89,3 +89,21 @@ Set `wrapOutput: true` to turn on the defaultWrapperGenerator from above.
 
 ### verbose
 Set `verbose: true` to see console logs from dust-loader-complete
+
+### render
+Set `render: true` to pre-render output for html-webpack-plugin to build static html files.
+
+Enable render inline to avoid conflicts with other templates meant to be compiled but not pre-rendered:
+```javascript
+new HtmlWebpackPlugin({
+    filename: 'index.html',
+    template: '!!dust-loader-complete?render!home.dust',
+}),
+```
+Pre-rendered templates use options object for reference data. So you can also set references inline:
+```javascript
+new HtmlWebpackPlugin({
+    filename: 'contact/index.html',
+    template: '!!dust-loader-complete?render&basePath=../!contact.dust',
+}),
+```

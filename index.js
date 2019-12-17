@@ -2,13 +2,14 @@
 'use-strict';
 
 // dependencies
+const fs = require('fs');
 const path = require('path');
 const dust = require('dustjs-linkedin');
 const { getOptions } = require('loader-utils');
 
 
 // Main loader function
-function loader(source) {
+async function loader(source) {
 
   // dust files don't have side effects, so loader results are cacheable
   if (this.cacheable) this.cacheable();
@@ -22,7 +23,8 @@ function loader(source) {
     wrapOutput: false,
     verbose: false,
     ignoreImages: false,
-    excludeImageRegex: undefined
+    excludeImageRegex: undefined,
+    render: false
   };
 
   // webpack 4 'this.options' was deprecated in webpack 3 and removed in webpack 4
@@ -35,6 +37,11 @@ function loader(source) {
 
   // merge user options with default options
   const options = Object.assign({}, default_options, loader_options);
+
+  // Set root to relative path if not set and render enabled
+  if (!options.root && options.render) {
+    options.root = this.context || this.rootContext;
+  }
 
   // Fix slashes & resolve root
   options.root = path.resolve(options.root.replace('/', path.sep));
@@ -55,7 +62,7 @@ function loader(source) {
   source = findPartials(source, template_path + '/../', options, deps);
 
   // Find image dependencies
-  if (!options.ignoreImages) {
+  if (!options.ignoreImages && !options.render) {
     source = findImages(name, source, deps, options);
   }
 
@@ -67,6 +74,21 @@ function loader(source) {
 
   // Compile the template
   const template = dust.compile(source, name);
+
+  // Render the returned html
+  if (options.render) {
+    let htmlString;
+
+    htmlString = await new Promise(function(resolve, reject) {
+      dust.loadSource(template);
+      dust.render(name, options, function(err, result) {
+        if(err) console.log(err);
+        resolve(result);
+      });
+    });
+
+    return "module.exports = `" + htmlString.replace(/\`/g, "\\\`") + "`";
+  }
 
   // Build the returned string
   let returnedString;
@@ -135,6 +157,19 @@ function findPartials(source, source_path, options, deps) {
 
       // update regex index
       reg.lastIndex += (replace.length - result[0].length);
+    }
+
+    if (options.render) {
+      // fetch partial source
+      partial.path = path.resolve(options.root, partial.name+".dust");
+      partial.source = fs.readFileSync(partial.path, 'utf8');
+
+      // recursive find and compile partials within partials
+      partial.source = findPartials(partial.source, source_path, options, deps);
+
+      // compile and cache partial
+      var compiled = dust.compile(partial.source, partial.name);
+      dust.loadSource(compiled);
     }
   }
 
