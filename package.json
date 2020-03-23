@@ -46,7 +46,7 @@
     "karma-mocha-reporter": "^1.1.1",
     "karma-webpack": "3.0.0",
     "mocha": "^6.2.2",
-    "webpack": "^4.41.2"
+    "webpack": "^4.42.0"
   },
   "engines": {
     "node": ">=6.9.0"

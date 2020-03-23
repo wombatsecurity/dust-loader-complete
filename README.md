@@ -7,20 +7,6 @@ dust-loader-complete is a webpack loader for DustJS files that compiles DustJS t
 2. It finds `<img>` tags and resolves the images specified in the `src` (see options below to disable or filter which paths are resolved).
 2. It adds a `templateName` to the compile template function which can be easier to pass around your application if needed.
 
-### 4.0.1 breaking changes
-* dust-loader-complete only supports:
-    * node versions greater than 6.9.x (lts/boron)
-    * webpack versions greater than 3.x.x
-    * dustjs-linkedin version greater than 2.7.2
-
-### 3.0.0 breaking changes
-* By default, the loader no longer wraps the templates in a wrapping function that calls `dust.render`. In addition, the `wrapperGenerator` option has been removed. It has been replaced by a `wrapOutput` option for backwards-compatibility. See below for details.
-* The default `dustAlias` has changed. See below for details.
-
-### 2.5.1 breaking changes
-As of version 2.5.1 this loader supports only Webpack 2 and up.
-
-
 ## Installation
 ```
     npm install --save-dev dust-loader-complete dustjs-linkedin
