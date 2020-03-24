@@ -1,4 +1,5 @@
 var dust = require( 'dustjs' );
+var expect = require('chai').expect;
 var templateWhitespacePreserved = require( "!!preserve-whitespace!whitespace" );
 var templateWhitespaceNotPreserved = require( "whitespace" );
 

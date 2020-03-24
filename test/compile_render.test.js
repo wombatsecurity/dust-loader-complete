@@ -1,4 +1,5 @@
 var dust = require( 'dustjs' );
+var expect = require('chai').expect;
 
 var simple = require( 'simple' );
 var variable = require( 'variable' );

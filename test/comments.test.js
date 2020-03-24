@@ -1,4 +1,5 @@
 var dust = require( 'dustjs' );
+var expect = require('chai').expect;
 var template = require( 'comments' );
 
 describe( "require comments", function () {
