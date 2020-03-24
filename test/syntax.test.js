@@ -1,4 +1,5 @@
 var dust = require( 'dustjs' );
+var expect = require('chai').expect;
 var syntax = require( 'syntax' );
 
 describe("dust-loader-complete's syntax matcher ", function( ) {

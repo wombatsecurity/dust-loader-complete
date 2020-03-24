@@ -1,5 +1,6 @@
 var path = require('path');
 var dust = require('dustjs');
+var expect = require('chai').expect;
 var template = require('image');
 
 const context = {
