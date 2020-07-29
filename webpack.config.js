@@ -1,4 +1,18 @@
 const {resolve, join} = require('path');
+const { spawn } = require("child_process")
+
+function RunTestsPlugin() {
+	return {
+		apply: compiler => {
+			compiler.hooks.done.tap("RunTestsPlugin", compilation => {
+				spawn("mocha test/output/main.js", {
+					stdio:"inherit",
+					shell: true
+				})
+			})
+		}
+	}
+}
 
 module.exports = {
 	mode: 'development',
@@ -44,5 +58,11 @@ module.exports = {
 				}
 			}
 		]
-	}
+	},
+	output: {
+		path: resolve('test', 'output')
+	},
+	plugins: [
+		RunTestsPlugin()
+	]
 };
