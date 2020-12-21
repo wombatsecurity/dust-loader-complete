@@ -887,7 +887,7 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
-"dustjs-linkedin@github:wombatsecurity/dustjs":
+dustjs-linkedin@wombatsecurity/dustjs:
   version "2.7.5"
   resolved "https://codeload.github.com/wombatsecurity/dustjs/tar.gz/addc83b87c31419519ace087fc5ea57d81a2caf3"
   dependencies:
