@@ -888,8 +888,8 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     stream-shift "^1.0.0"
 
 dustjs-linkedin@wombatsecurity/dustjs:
-  version "2.8.0"
-  resolved "https://codeload.github.com/wombatsecurity/dustjs/tar.gz/248626c1fe6eba8dca09bf58d2c144d771ee15d5"
+  version "2.8.1"
+  resolved "https://codeload.github.com/wombatsecurity/dustjs/tar.gz/ea0066d5737c23ec4c017130becfbd0fa9d43e5a"
   dependencies:
     chokidar "^3.3.0"
     cli "^1.0.1"
