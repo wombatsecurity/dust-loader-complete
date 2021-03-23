@@ -1,3 +1,7 @@
+# [DEPRECATED]
+
+This library has been deprecated and will no longer be maintained.
+
 # dust-loader-complete
 A complete webpack loader for DustJS files.
 
